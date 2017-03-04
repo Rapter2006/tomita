@@ -4,12 +4,22 @@
 Command -> 'создать' | 'открыть';
 Element -> 'задача' | 'событие';
 
-CommandInterp -> Command interp (Fact.Command::not_norm);
-ElementInterp -> Element interp (Fact.Element);
-Name -> Noun interp(Fact.Name);
+CommandInterp -> Command interp (Fact.Command::norm="inf");
+ElementInterp -> Element interp (Fact.Element::norm="nom,sg");
+
+Name -> Noun | Adj | Verb;
+Name -> Name Name;
+Name -> Name Name Name;
+Name -> Name Name Name Name;
+Name -> Name Name Name Name Name;
+Names -> Name interp(Fact.Name); 
 
 
-S -> CommandInterp ElementInterp Name;
+
+
+S -> CommandInterp ElementInterp Names;
+S -> CommandInterp ElementInterp Names "на" Noun;
+ 
 
 
 
